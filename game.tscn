@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxsv6xnne0ii2"]
+[gd_scene load_steps=6 format=3 uid="uid://cxsv6xnne0ii2"]
 
 [ext_resource type="PackedScene" uid="uid://bpee7ikyb48qu" path="res://paddle.tscn" id="1_irae6"]
 [ext_resource type="Script" path="res://game.gd" id="1_qkpga"]
 [ext_resource type="PackedScene" uid="uid://ccdds8m3vpgew" path="res://ball.tscn" id="3_swh6n"]
+[ext_resource type="PackedScene" uid="uid://bypff1ewnf8it" path="res://level_1.tscn" id="4_u0ecj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oe7gl"]
 size = Vector2(20, 64.759)
@@ -51,4 +52,6 @@ shape = SubResource("RectangleShape2D_oe7gl")
 [node name="Ball" parent="." instance=ExtResource("3_swh6n")]
 position = Vector2(306, 325)
 
-[connection signal="body_entered" from="Field/KillZone" to="Paddle" method="_on_kill_zone_body_entered"]
+[node name="Bricks" parent="." instance=ExtResource("4_u0ecj")]
+
+[connection signal="body_entered" from="Field/KillZone" to="." method="_on_kill_zone_body_entered"]

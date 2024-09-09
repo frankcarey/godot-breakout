@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cislktws6ar6d"]
+
+[ext_resource type="Script" path="res://brick.gd" id="1_r0up2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0y30"]
+size = Vector2(136, 41)
+
+[node name="Brick" type="StaticBody2D"]
+scale = Vector2(0.99758, 1.07053)
+script = ExtResource("1_r0up2")
+hits_remaining = null
+color = Color(0, 0.627658, 0, 1)
+size = Vector2(136, 41)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i0y30")

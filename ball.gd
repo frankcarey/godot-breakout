@@ -1,4 +1,4 @@
-
+@tool
 extends CharacterBody2D
 
 @onready var shape: CircleShape2D = $"CollisionShape2D".shape
@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
             # We collided with a paddle, so just change the name for readability.
             var paddle: Paddle = collider
             
+            # Get the magnitude of the velocity (speed) before we manipulate it.
+            var speed = velocity.length()
+            
             # Offset the velocity based on where along the paddle it impacted.
             # Note: This calls the custom get_width() function on paddle.gd
             var width = paddle.get_paddle_width()
@@ -33,10 +36,15 @@ func _physics_process(delta: float) -> void:
             velocity.x += offset * 100.0  # Adds an offset based on the hit location to create angled bounces
 
             # Normalize the velocity vector to keep the ball speed constant
-            velocity = velocity.normalized() * 300  # Ensuring constant speed after bounce
+            velocity = velocity.normalized() * speed  # Ensuring constant speed after bounce
     
-
-    
+        if collider.is_in_group("Brick"):
+            var brick = collider
+            # Call the custom hit() function on brick.gd
+            brick.hit()
+            # Increase velocity by 10%
+            velocity *= 1.1
+            
     
     
     
