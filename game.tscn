@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxsv6xnne0ii2"]
+
+[ext_resource type="PackedScene" uid="uid://bpee7ikyb48qu" path="res://paddle.tscn" id="1_irae6"]
+[ext_resource type="Script" path="res://game.gd" id="1_qkpga"]
+[ext_resource type="PackedScene" uid="uid://ccdds8m3vpgew" path="res://ball.tscn" id="3_swh6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe7gl"]
+size = Vector2(20, 64.759)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_qkpga")
+
+[node name="Paddle" parent="." instance=ExtResource("1_irae6")]
+position = Vector2(574, 589)
+
+[node name="Field" type="Node2D" parent="."]
+
+[node name="WallLeft" type="StaticBody2D" parent="Field"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/WallLeft"]
+position = Vector2(-20, 326)
+scale = Vector2(1.8, 9.96)
+shape = SubResource("RectangleShape2D_oe7gl")
+
+[node name="WallRight" type="StaticBody2D" parent="Field"]
+position = Vector2(1192, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/WallRight"]
+position = Vector2(-20, 326)
+scale = Vector2(1.8, 9.96)
+shape = SubResource("RectangleShape2D_oe7gl")
+
+[node name="WallTop" type="StaticBody2D" parent="Field"]
+position = Vector2(1210, 3)
+scale = Vector2(31.92, -0.12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/WallTop"]
+position = Vector2(-20, 326)
+scale = Vector2(1.8, 9.96)
+shape = SubResource("RectangleShape2D_oe7gl")
+
+[node name="KillZone" type="Area2D" parent="Field"]
+position = Vector2(1211, 725)
+scale = Vector2(31.92, -0.12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/KillZone"]
+position = Vector2(-20, 326)
+scale = Vector2(1.8, 9.96)
+shape = SubResource("RectangleShape2D_oe7gl")
+
+[node name="Ball" parent="." instance=ExtResource("3_swh6n")]
+position = Vector2(306, 325)
+
+[connection signal="body_entered" from="Field/KillZone" to="Paddle" method="_on_kill_zone_body_entered"]
